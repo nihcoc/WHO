@@ -1,0 +1,6 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Admin</title><link rel="stylesheet" href="style.css"></head><body><main>
+<h1>Organizer</h1><div id="lg"><input id="pw" type="password" placeholder="Admin password"><button id="in">Sign in</button></div><div id="pn" hidden>
+<p><button data-a="start">Start</button> <button data-a="pause">Pause</button> <button data-a="resume">Resume</button> <button data-a="end">End</button> <button data-a="reset">Reset</button></p>
+<p>Duration (s) <input id="du" type="number" value="3600"> <label><input id="lb" type="checkbox" checked> Leaderboard</label> <button id="sv">Save config</button></p>
+<p>Hints JSON <br><textarea id="hj" rows="6" style="width:100%;background:#16181d;color:#d8dbe2"></textarea></p><pre id="out" class="mono"></pre></div><p id="e" class="err"></p></main>
+<script src="admin.js"></script></body></html>

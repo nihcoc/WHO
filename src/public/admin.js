@@ -1,0 +1,6 @@
+const $=s=>document.querySelector(s);const post=async(p,b)=>{const r=await fetch('/api/admin/'+p,{method:'POST',headers:{'content-type':'application/json','x-requested-with':'fetch'},body:JSON.stringify(b||{})});const j=await r.json();if(!r.ok)throw new Error(j.error);return j};
+const ref=async()=>{try{const r=await fetch('/api/admin/status');if(!r.ok)throw 0;const j=await r.json();$('#lg').hidden=true;$('#pn').hidden=false;if(!$('#hj').value)$('#hj').value=JSON.stringify(j.allHints);$('#out').textContent=JSON.stringify({status:j.status,elapsed:j.elapsed,winner:j.winner,players:j.players,attempts:j.attempts,uptime:j.uptime},null,1)}catch{}};
+$('#in').onclick=async()=>{try{await post('login',{password:$('#pw').value});ref()}catch(e){$('#e').textContent=e.message}};
+document.addEventListener('click',async e=>{const a=e.target.dataset.a;if(!a)return;if(a==='reset'&&!confirm('Reset game and all player progress?'))return;try{await post(a,{confirm:true});$('#e').textContent=''}catch(x){$('#e').textContent=x.message}ref()});
+$('#sv').onclick=async()=>{try{await post('config',{duration:+$('#du').value,showLeaderboard:$('#lb').checked,hints:JSON.parse($('#hj').value)})}catch(x){$('#e').textContent=x.message}};
+setInterval(ref,3000);ref();
